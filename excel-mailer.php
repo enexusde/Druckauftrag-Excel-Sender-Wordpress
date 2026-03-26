@@ -123,7 +123,7 @@ function cf7_form_list_page() {
 
 add_action('admin_enqueue_scripts', function($hook) {
     if ($hook !== 'settings_page_cf7-excel-mapping') return; 
-    wp_enqueue_style('cf7-excel-css', plugin_dir_url(__FILE__) . 'cf7-excel.css', [], '1.0');
+    wp_enqueue_style('cf7-excel-css', plugin_dir_url(__FILE__) . 'excel-mailer.css', [], '1.0');
 });
 
     ?>
