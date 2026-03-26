@@ -1,0 +1,87 @@
+name: Build & Release WordPress Plugin
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - 'v*'
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    outputs:
+      version: ${{ steps.vars.outputs.version }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set version
+        id: vars
+        run: |
+          if [[ "$GITHUB_REF" == refs/tags/* ]]; then
+            VERSION=${GITHUB_REF#refs/tags/v}
+          else
+            VERSION="dev-$(git rev-parse --short HEAD)"
+          fi
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "Using version: $VERSION"
+
+      - name: Inject version into plugin file
+        run: |
+          sed -i "s/Version: XXX/Version: ${{ steps.vars.outputs.version }}/" excel-mailer.php
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: mbstring, zip, xml, gd, intl
+
+      - name: Install Composer
+        run: |
+          php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+          php composer-setup.php --install-dir=/usr/local/bin --filename=composer
+
+      - name: Install dependencies
+        run: composer install --no-dev --prefer-dist
+
+      - name: Prepare plugin build
+        run: |
+          mkdir -p build/excel-mailer
+          cp excel-mailer.php build/excel-mailer/
+          cp excel-mailer.css build/excel-mailer/
+          cp -r vendor build/excel-mailer/
+
+      - name: Create ZIP package
+        run: |
+          cd build
+          zip -r ../excel-mailer-${{ steps.vars.outputs.version }}.zip excel-mailer
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: excel-mailer-${{ steps.vars.outputs.version }}
+          path: excel-mailer-${{ steps.vars.outputs.version }}.zip
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/v')
+
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: excel-mailer-${{ needs.build.outputs.version }}
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: excel-mailer-${{ needs.build.outputs.version }}.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
