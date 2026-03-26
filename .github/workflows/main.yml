@@ -1,0 +1,45 @@
+name: Build WordPress Plugin
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.0'
+          extensions: mbstring, zip
+
+      - name: Install composer dependencies
+        run: |
+          if [ -f composer.json ]; then
+            composer install --no-dev --prefer-dist
+          fi
+
+      - name: Prepare plugin build
+        run: |
+          mkdir -p build
+          cp -r excel-mailer.php build/
+          cp -r excel-mailer.css build/
+
+      - name: Create ZIP package
+        run: |
+          cd build
+          zip -r ../excel-mailer.zip .
+      
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: excel-mailer-plugin
+          path: excel-mailer.zip
