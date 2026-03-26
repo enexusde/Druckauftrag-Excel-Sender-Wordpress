@@ -1,0 +1,97 @@
+table.designx {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+table.designx th, table.designx td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+table.designx th {
+    background-color: #4CAF50;
+    color: white;
+    font-size: 16px;
+}
+
+table.designx td {
+    background-color: #f9f9f9;
+    font-size: 14px;
+    color: #333;
+}
+
+table.designx tr:hover {
+    background-color: #f1f1f1;
+}
+
+table.designx tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+table.designx tr:nth-child(odd) {
+    background-color: #fff;
+}
+
+table.designx th:last-child, table.designx td:last-child {
+    border-right: 0;
+}
+
+table.designx td:first-child {
+    font-weight: bold;
+}
+
+table.designx {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+@media screen and (max-width: 768px) {
+    table.designx {
+        width: 100%;
+        border: 0;
+    }
+    table.designx th, table.designx td {
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    table.designx td {
+        padding: 10px;
+        text-align: right;
+        border-bottom: 1px solid #ddd;
+    }
+    table.designx th {
+        display: none;
+    }
+}
+table.designx input {width:100%;}
+
+
+.excelmailer p {
+	display: block;
+	max-width: 400px;
+}
+
+.excelmailer button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.excelmailer button:hover {
+    background-color: #45a049;
+}
+
+.excelmailer button:focus {
+    outline: none;
+}
