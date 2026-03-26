@@ -1,6 +1,7 @@
 # Internetseite befüllt Excel-Vorlage für eMail (Wordpress)
 Sie wollen Formulareingaben im Internet als .ods-eMail empfangen? Hier sind Sie richtig.
 
+<<<<<<< HEAD
 ## Anleitung
 Diese Anleitung soll helfen die online/internet/web Formulare in Excel-Dateien abzuschicken.
 ### 1. Anmelden
@@ -31,3 +32,8 @@ Die Excel-Datei die durch das Formular ausgefüllt werden soll kann mit dem Knop
 
 ![foto-von-excel-fehlt](Documentation/docu-filled-ods.png "")
 
+=======
+
+
+[Download Latest Version](https://github.com/enexusde/Druckauftrag-Excel-Sender-Wordpress/releases)
+>>>>>>> branch 'main' of https://github.com/enexusde/Druckauftrag-Excel-Sender-Wordpress.git
