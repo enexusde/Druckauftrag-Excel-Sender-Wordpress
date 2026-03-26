@@ -99,6 +99,13 @@ function cf7_form_list_page() {
                                 </td>
                             </tr>
                         <?php endforeach; ?>
+						<?php if (empty($fields)) : ?>
+						    <tr>
+						        <td colspan="4" style="text-align:center; color:#999;">
+						            Keine Formular-Felder erkannt.
+						        </td>
+						    </tr>
+						<?php endif; ?>
                     </tbody>
                 </table>
                 
