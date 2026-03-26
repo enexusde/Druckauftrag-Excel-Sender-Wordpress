@@ -1,7 +1,16 @@
+![Build Status](https://github.com/enexusde/Druckauftrag-Excel-Sender-Wordpress/actions/workflows/main.yml/badge.svg?style=flat-square)
+![GitHub release](https://img.shields.io/github/v/release/enexusde/Druckauftrag-Excel-Sender-Wordpress?style=flat-square)
+![Downloads](https://img.shields.io/github/downloads/enexusde/Druckauftrag-Excel-Sender-Wordpress/total?style=flat-square)
+![License](https://img.shields.io/github/license/enexusde/Druckauftrag-Excel-Sender-Wordpress?style=flat-square)
+![Last Commit](https://img.shields.io/github/last-commit/enexusde/Druckauftrag-Excel-Sender-Wordpress?style=flat-square)
+
+
 # Internetseite befüllt Excel-Vorlage für eMail (Wordpress)
 Sie wollen Formulareingaben im Internet als .ods-eMail empfangen? Hier sind Sie richtig.
 
 [Download Latest Version](https://github.com/enexusde/Druckauftrag-Excel-Sender-Wordpress/releases)
+
+
 
 ## Anleitung
 Diese Anleitung soll helfen die online/internet/web Formulare in Excel-Dateien abzuschicken.
