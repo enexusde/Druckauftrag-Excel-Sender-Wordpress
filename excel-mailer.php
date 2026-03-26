@@ -2,7 +2,7 @@
 /*
 Plugin Name: CF7 to Excel
 Description: Speichert Formulareingaben von Contact Form 7 in einer hochgeladenen Excel-Vorlage.
-Version: 1.2
+Version: XXX
 Author: Peter Rader
 */
 
