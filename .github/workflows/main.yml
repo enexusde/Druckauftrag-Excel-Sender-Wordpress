@@ -19,25 +19,35 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.0'
-          extensions: mbstring, zip
+          extensions: mbstring, zip, xml, gd, intl
 
-      - name: Install composer dependencies
+      - name: Install Composer
         run: |
-          if [ -f composer.json ]; then
-            composer install --no-dev --prefer-dist
-          fi
+          php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+          php composer-setup.php --install-dir=/usr/local/bin --filename=composer
+          composer --version
+
+      - name: Install dependencies
+        run: composer install --no-dev --prefer-dist
 
       - name: Prepare plugin build
         run: |
-          mkdir -p build
-          cp -r excel-mailer.php build/
-          cp -r excel-mailer.css build/
+          mkdir -p build/excel-mailer
+          # Plugin-Hauptdatei
+          cp excel-mailer.php build/excel-mailer/
+          # CSS-Datei
+          cp excel-mailer.css build/excel-mailer/
+          # Vendor-Verzeichnis
+          cp -r vendor build/excel-mailer/
+          # Falls du weitere Dateien hast, z.B. includes oder assets, hier hinzufügen:
+          # cp -r includes build/excel-mailer/
+          # cp -r assets build/excel-mailer/
 
       - name: Create ZIP package
         run: |
           cd build
-          zip -r ../excel-mailer.zip .
-      
+          zip -r ../excel-mailer.zip excel-mailer
+
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
